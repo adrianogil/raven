@@ -1,9 +1,11 @@
 import os
+from PySide2.QtCore import QObject, Slot
 from pyutils.pyside.qmlapp import QMLApp
 from raven.core.requests_manager import send_request
 
-class MainWindow:
+class MainWindow(QObject):
     def __init__(self):
+        super().__init__()
         # Initialize QML application instance
         self.app = QMLApp()
         # Point to Main.qml
@@ -16,6 +18,7 @@ class MainWindow:
         self.app.qml_engine.rootContext().setContextProperty("mainWindow", self)
         self.app.show()
 
+    @Slot(str, str, str, str)
     def handleSendRequest(self, method, url, headers, body):
         """
         Called from QML to send the request and update the UI.
@@ -32,16 +35,22 @@ class MainWindow:
         response = send_request(method, url, parsed_headers, body)
 
         # Update the QML side with response details
+        root_object = self.app.qml_engine.rootObjects()[0]
+        response_panel = root_object.findChild(QObject, "responsePanel")
+        if response_panel is None:
+            print("Error: responsePanel not found in QML tree.")
+            return
+
         if response:
             # Access the QML objects by name (if needed) or set context properties
-            self.app.qml_engine.rootObjects[0].findChild(type=None, name="responsePanel").statusText = str(response.status_code)
-            self.app.qml_engine.rootObjects[0].findChild(type=None, name="responsePanel").responseHeaders = str(response.headers)
-            self.app.qml_engine.rootObjects[0].findChild(type=None, name="responsePanel").responseBody = response.text
+            response_panel.setProperty("statusText", str(response.status_code))
+            response_panel.setProperty("responseHeaders", str(response.headers))
+            response_panel.setProperty("responseBody", response.text)
         else:
             # Show some error info
-            self.app.qml_engine.rootObjects[0].findChild(type=None, name="responsePanel").statusText = "Error"
-            self.app.qml_engine.rootObjects[0].findChild(type=None, name="responsePanel").responseHeaders = ""
-            self.app.qml_engine.rootObjects[0].findChild(type=None, name="responsePanel").responseBody = "Could not send request."
+            response_panel.setProperty("statusText", "Error")
+            response_panel.setProperty("responseHeaders", "")
+            response_panel.setProperty("responseBody", "Could not send request.")
 
 if __name__ == '__main__':
     window = MainWindow()

@@ -19,8 +19,12 @@ ApplicationWindow {
             id: topBar
             Layout.fillWidth: true
             onSendClicked: {
-                // For example:
-                // mainWindow.handleSendRequest(methodCombo.currentText, urlField.text, requestPanel.headersText, requestPanel.bodyText)
+                mainWindow.handleSendRequest(
+                    methodCombo.currentText,
+                    urlField.text,
+                    requestPanel.headersText,
+                    requestPanel.bodyText
+                )
             }
         }
 
@@ -37,6 +41,7 @@ ApplicationWindow {
 
             ResponsePanel {
                 id: responsePanel
+                objectName: "responsePanel"
                 Layout.preferredWidth: parent.width * 0.6
             }
         }
