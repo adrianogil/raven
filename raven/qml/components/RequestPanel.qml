@@ -30,30 +30,32 @@ Rectangle {
             }
 
             TabButton {
+                id: headersTab
                 text: "Headers"
                 font.bold: true
                 background: Rectangle {
                     radius: 8
-                    color: control.checked ? "#2d6cdf" : "transparent"
+                    color: headersTab.checked ? "#2d6cdf" : "transparent"
                 }
                 contentItem: Text {
-                    text: control.text
-                    color: control.checked ? "#ffffff" : "#334155"
+                    text: headersTab.text
+                    color: headersTab.checked ? "#ffffff" : "#334155"
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                 }
             }
             TabButton {
+                id: bodyTab
                 text: "Body"
                 font.bold: true
                 background: Rectangle {
                     radius: 8
-                    color: control.checked ? "#2d6cdf" : "transparent"
+                    color: bodyTab.checked ? "#2d6cdf" : "transparent"
                 }
                 contentItem: Text {
-                    text: control.text
-                    color: control.checked ? "#ffffff" : "#334155"
+                    text: bodyTab.text
+                    color: bodyTab.checked ? "#ffffff" : "#334155"
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter

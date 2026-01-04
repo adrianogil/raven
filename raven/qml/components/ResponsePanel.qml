@@ -31,45 +31,48 @@ Rectangle {
             }
 
             TabButton {
+                id: statusTab
                 text: "Status"
                 font.bold: true
                 background: Rectangle {
                     radius: 8
-                    color: control.checked ? "#2d6cdf" : "transparent"
+                    color: statusTab.checked ? "#2d6cdf" : "transparent"
                 }
                 contentItem: Text {
-                    text: control.text
-                    color: control.checked ? "#ffffff" : "#334155"
+                    text: statusTab.text
+                    color: statusTab.checked ? "#ffffff" : "#334155"
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                 }
             }
             TabButton {
+                id: responseHeadersTab
                 text: "Headers"
                 font.bold: true
                 background: Rectangle {
                     radius: 8
-                    color: control.checked ? "#2d6cdf" : "transparent"
+                    color: responseHeadersTab.checked ? "#2d6cdf" : "transparent"
                 }
                 contentItem: Text {
-                    text: control.text
-                    color: control.checked ? "#ffffff" : "#334155"
+                    text: responseHeadersTab.text
+                    color: responseHeadersTab.checked ? "#ffffff" : "#334155"
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                 }
             }
             TabButton {
+                id: responseBodyTab
                 text: "Body"
                 font.bold: true
                 background: Rectangle {
                     radius: 8
-                    color: control.checked ? "#2d6cdf" : "transparent"
+                    color: responseBodyTab.checked ? "#2d6cdf" : "transparent"
                 }
                 contentItem: Text {
-                    text: control.text
-                    color: control.checked ? "#ffffff" : "#334155"
+                    text: responseBodyTab.text
+                    color: responseBodyTab.checked ? "#ffffff" : "#334155"
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter

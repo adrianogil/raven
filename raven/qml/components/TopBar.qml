@@ -46,15 +46,16 @@ Rectangle {
         }
 
         Button {
+            id: sendButton
             text: "Send"
             font.bold: true
             Layout.preferredWidth: 100
             background: Rectangle {
                 radius: 10
-                color: control.down ? "#1f4fbf" : "#2d6cdf"
+                color: sendButton.down ? "#1f4fbf" : "#2d6cdf"
             }
             contentItem: Text {
-                text: control.text
+                text: sendButton.text
                 color: "#ffffff"
                 font.bold: true
                 horizontalAlignment: Text.AlignHCenter
