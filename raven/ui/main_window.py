@@ -35,20 +35,22 @@ class MainWindow(QObject):
         response = send_request(method, url, parsed_headers, body)
 
         # Update the QML side with response details
-        response_panel = self.app.qml_engine.rootObjects()[0].findChild(QObject, "responsePanel")
+        root_object = self.app.qml_engine.rootObjects()[0]
+        response_panel = root_object.findChild(QObject, "responsePanel")
         if response_panel is None:
+            print("Error: responsePanel not found in QML tree.")
             return
 
         if response:
             # Access the QML objects by name (if needed) or set context properties
-            response_panel.statusText = str(response.status_code)
-            response_panel.responseHeaders = str(response.headers)
-            response_panel.responseBody = response.text
+            response_panel.setProperty("statusText", str(response.status_code))
+            response_panel.setProperty("responseHeaders", str(response.headers))
+            response_panel.setProperty("responseBody", response.text)
         else:
             # Show some error info
-            response_panel.statusText = "Error"
-            response_panel.responseHeaders = ""
-            response_panel.responseBody = "Could not send request."
+            response_panel.setProperty("statusText", "Error")
+            response_panel.setProperty("responseHeaders", "")
+            response_panel.setProperty("responseBody", "Could not send request.")
 
 if __name__ == '__main__':
     window = MainWindow()
