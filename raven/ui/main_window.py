@@ -1,9 +1,11 @@
 import os
+from PySide2.QtCore import QObject, Slot
 from pyutils.pyside.qmlapp import QMLApp
 from raven.core.requests_manager import send_request
 
-class MainWindow:
+class MainWindow(QObject):
     def __init__(self):
+        super().__init__()
         # Initialize QML application instance
         self.app = QMLApp()
         # Point to Main.qml
@@ -16,6 +18,7 @@ class MainWindow:
         self.app.qml_engine.rootContext().setContextProperty("mainWindow", self)
         self.app.show()
 
+    @Slot(str, str, str, str)
     def handleSendRequest(self, method, url, headers, body):
         """
         Called from QML to send the request and update the UI.
