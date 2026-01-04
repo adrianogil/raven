@@ -41,6 +41,7 @@ ApplicationWindow {
 
             ResponsePanel {
                 id: responsePanel
+                objectName: "responsePanel"
                 Layout.preferredWidth: parent.width * 0.6
             }
         }
