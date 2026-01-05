@@ -44,7 +44,13 @@ class MainWindow(QObject):
         if response:
             # Access the QML objects by name (if needed) or set context properties
             response_panel.setProperty("statusText", str(response.status_code))
-            response_panel.setProperty("responseHeaders", str(response.headers))
+            formatted_headers = "\n".join(
+                f"{key}: {value}" for key, value in response.headers.items()
+            )
+            response_panel.setProperty(
+                "responseHeaders",
+                formatted_headers if formatted_headers else "No response headers.",
+            )
             response_panel.setProperty("responseBody", response.text)
         else:
             # Show some error info

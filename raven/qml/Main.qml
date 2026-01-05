@@ -8,11 +8,13 @@ ApplicationWindow {
     width: 1200
     height: 800
     title: qsTr("Raven - Postman-like UI")
+    color: "#f4f6fb"
 
     // Main vertical layout: Top bar at the top, then the SplitView below
     ColumnLayout {
         anchors.fill: parent
-        spacing: 0
+        anchors.margins: 16
+        spacing: 16
 
         // Top bar (method, URL, Send)
         TopBar {
@@ -33,6 +35,11 @@ ApplicationWindow {
             Layout.fillWidth: true
             Layout.fillHeight: true
             orientation: Qt.Horizontal
+            handle: Rectangle {
+                implicitWidth: 8
+                color: "#d6dbe7"
+                radius: 4
+            }
 
             RequestPanel {
                 id: requestPanel
