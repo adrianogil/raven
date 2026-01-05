@@ -105,6 +105,9 @@ Rectangle {
                         anchors.fill: parent
                         text: responsePanel.responseHeaders
                         readOnly: true
+                        wrapMode: Text.WrapAnywhere
+                        font.family: "monospace"
+                        font.pixelSize: 13
                         padding: 10
                         background: Rectangle {
                             color: "#f8f9fc"
