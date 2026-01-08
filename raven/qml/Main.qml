@@ -20,8 +20,18 @@ ApplicationWindow {
         TopBar {
             id: topBar
             Layout.fillWidth: true
+            projectName: projectName
             onSendClicked: {
                 mainWindow.handleSendRequest(
+                    methodCombo.currentText,
+                    urlField.text,
+                    requestPanel.headersText,
+                    requestPanel.bodyText
+                )
+            }
+            onSaveClicked: {
+                mainWindow.saveRequestToProject(
+                    requestNameField.text,
                     methodCombo.currentText,
                     urlField.text,
                     requestPanel.headersText,
